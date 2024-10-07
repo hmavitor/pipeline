@@ -1,29 +1,41 @@
-# Etapa 1: Escolher uma imagem base do Python
-FROM python:3.9-slim
+# Use an official lightweight Linux base
+FROM ubuntu:20.04
 
-# Etapa 2: Instalar dependências do sistema
+# Set non-interactive mode for tzdata installation to avoid prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies for Conda and configure time zone in non-interactive mode
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libbz2-dev \
-    liblzma-dev \
-    libssl-dev \
-    libncurses5-dev \
-    libncursesw5-dev \
-    zlib1g-dev \
-    libsqlite3-dev \
-    curl \
+    wget \
+    bzip2 \
+    ca-certificates \
+    libglib2.0-0 \
+    libxext6 \
+    libsm6 \
+    libxrender1 \
     git \
-    && rm -rf /var/lib/apt/lists/*
+    tzdata \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*  # Cleanup for reduced image size
 
-# Etapa 3: Instalar bibliotecas Python (snakemake, flask, e outras)
-RUN pip install --upgrade pip
-RUN pip install snakemake flask requests
+# Download Miniconda and cache it
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh \
+    && bash /miniconda.sh -b -p /opt/conda \
+    && rm /miniconda.sh \
+    && /opt/conda/bin/conda clean -ya  # Clean to reduce image size
 
-# Etapa 4: Adicionar o diretório do projeto
+# Set path to conda
+ENV PATH=/opt/conda/bin:$PATH
+
+# Install Snakemake, Pysam, and clean conda caches
+RUN conda install -c conda-forge -c bioconda snakemake pysam \
+    && conda clean --all -y  # Clean conda cache to reduce image size
+
+# Set up working directory (this is where your vcf_pipeline repo will go)
 WORKDIR /app
 
-# Etapa 5: Copiar o código do projeto para o Docker
-COPY . /app
+# Expose any relevant ports if needed (optional)
+EXPOSE 3000
 
-# Etapa 6: Definir o comando inicial do container (ex: rodar o pipeline ou iniciar o Flask)
-CMD ["python", "app.py"]
+# Default command to keep the container running or open bash for development
+CMD [ "/bin/bash" ]
