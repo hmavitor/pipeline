@@ -1,0 +1,107 @@
+host: df6c4a725568
+Building DAG of jobs...
+shared_storage_local_copies: True
+remote_exec: False
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+filter_vcf        1
+total             1
+
+Resources before job selection: {'_cores': 4, '_nodes': 9223372036854775807, '_job_count': 9223372036854775807}
+Ready jobs: 1
+Select jobs to execute...
+Selecting jobs to run using greedy solver.
+Selected jobs: 1
+Resources after job selection: {'_cores': 3, '_nodes': 9223372036854775806, '_job_count': 9223372036854775807}
+Execute 1 jobs...
+
+[Tue Oct  8 00:58:10 2024]
+localrule filter_vcf:
+    input: input_data/NIST.vcf
+    output: results/filtered.vcf
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+Full Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/executors/local.py", line 423, in run_wrapper
+    run(
+  File "/app/vcf_pipeline/Snakefile", line 25, in __rule_filter_vcf
+    input:
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 1563, in script
+    executor.evaluate()
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 454, in evaluate
+    self.execute_script(fd.name, edit=edit)
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 697, in execute_script
+    self._execute_cmd(
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 482, in _execute_cmd
+    return shell(
+           ^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/shell.py", line 357, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  /opt/conda/bin/python3.12 /app/vcf_pipeline/.snakemake/scripts/tmpco9axv2h.filter_vcf.py' returned non-zero exit status 1.
+
+Full Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/executors/local.py", line 423, in run_wrapper
+    run(
+  File "/app/vcf_pipeline/Snakefile", line 25, in __rule_filter_vcf
+    input:
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 1563, in script
+    executor.evaluate()
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 454, in evaluate
+    self.execute_script(fd.name, edit=edit)
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 697, in execute_script
+    self._execute_cmd(
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/script/__init__.py", line 482, in _execute_cmd
+    return shell(
+           ^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/shell.py", line 357, in __new__
+    raise sp.CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command 'set -euo pipefail;  /opt/conda/bin/python3.12 /app/vcf_pipeline/.snakemake/scripts/tmpco9axv2h.filter_vcf.py' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/executors/local.py", line 261, in _callback
+    raise ex
+  File "/opt/conda/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/executors/local.py", line 247, in cached_or_run
+    run_func(*args)
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/executors/local.py", line 459, in run_wrapper
+    raise RuleException(
+snakemake.exceptions.RuleException: CalledProcessError in file /app/vcf_pipeline/Snakefile, line 12:
+Command 'set -euo pipefail;  /opt/conda/bin/python3.12 /app/vcf_pipeline/.snakemake/scripts/tmpco9axv2h.filter_vcf.py' returned non-zero exit status 1.
+
+RuleException:
+CalledProcessError in file /app/vcf_pipeline/Snakefile, line 12:
+Command 'set -euo pipefail;  /opt/conda/bin/python3.12 /app/vcf_pipeline/.snakemake/scripts/tmpco9axv2h.filter_vcf.py' returned non-zero exit status 1.
+[Tue Oct  8 00:58:11 2024]
+Error in rule filter_vcf:
+    jobid: 0
+    input: input_data/NIST.vcf
+    output: results/filtered.vcf
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-10-08T005810.389673.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
+Full Traceback (most recent call last):
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/cli.py", line 2095, in args_to_api
+    dag_api.execute_workflow(
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/api.py", line 595, in execute_workflow
+    workflow.execute(
+  File "/opt/conda/lib/python3.12/site-packages/snakemake/workflow.py", line 1340, in execute
+    raise WorkflowError("At least one job did not complete successfully.")
+snakemake_interface_common.exceptions.WorkflowError: At least one job did not complete successfully.
+
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,9 @@
+host: df6c4a725568
+Building DAG of jobs...
+shared_storage_local_copies: True
+remote_exec: False
+Nothing to be done (all requested files are present and up to date).
+unlocking
+removing lock
+removing lock
+removed all locks

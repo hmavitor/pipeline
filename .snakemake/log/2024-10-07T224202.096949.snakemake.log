@@ -1,0 +1,36 @@
+host: df6c4a725568
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+filter_vcf        1
+total             1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Oct  7 22:42:02 2024]
+localrule filter_vcf:
+    input: input_data/NIST.vcf
+    output: results/filtered.vcf
+    jobid: 0
+    reason: Missing output files: results/filtered.vcf
+    resources: tmpdir=/tmp
+
+RuleException:
+CalledProcessError in file /app/vcf_pipeline/Snakefile, line 12:
+Command 'set -euo pipefail;  /opt/conda/bin/python3.12 /app/vcf_pipeline/.snakemake/scripts/tmpxzf3wl1f.filter_vcf.py' returned non-zero exit status 1.
+[Mon Oct  7 22:42:02 2024]
+Error in rule filter_vcf:
+    jobid: 0
+    input: input_data/NIST.vcf
+    output: results/filtered.vcf
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-10-07T224202.096949.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
